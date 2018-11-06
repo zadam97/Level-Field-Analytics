@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   Text,
+  StatusBar,
 } from 'react-native';
 
 import Color from './color';
@@ -16,9 +17,14 @@ export default function Header(props) {
 
   return (
     <View style={styles.container}>
-      <Text style ={styles.title}>
-          Level Field Analytics
-      </Text>
+         <StatusBar
+              backgroundColor='#2E2E2E'
+              //^for android match with header background
+              barStyle="light-content"
+         />
+          <Text style ={styles.title}>
+              Level Field Analytics
+          </Text>
     </View>
   );
 }

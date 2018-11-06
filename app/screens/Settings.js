@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {AsyncStorage, StyleSheet, Button, Text, ScrollView, View, Dimensions} from 'react-native';
 import { VictoryZoomContainer, VictoryBrushContainer, VictoryBar, VictoryLine, VictoryChart, VictoryTheme, VictoryAxis, VictoryStack } from "victory-native";
- 
+import Header from '../components/Header';
+
 const deviceWidth = Dimensions.get ('window').width;
 const deviceHeight = Dimensions.get ('window').height;
 
@@ -24,6 +25,7 @@ export default class Settings extends Component {
   render() {
     return (
         <View>
+          <Header/>
           <VictoryChart width={400} height={350} scale={{x: "time"}}
             containerComponent={
               <VictoryZoomContainer responsive={false}

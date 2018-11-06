@@ -9,6 +9,7 @@ import Stats from '../screens/Stats';
 import Settings from '../screens/Settings';
 
 import SignIn from '../screens/SignIn';
+import OnBoarding from '../screens/OnBoarding';
 import AuthLoadingScreen from '../screens/AuthLoadingScreen';
 
 
@@ -64,8 +65,8 @@ export const createRootNavigator = () => {
   )
 };
 
-export const AuthScreens = createStackNavigator({ SignIn: SignIn });
-
+export const AuthScreens = createStackNavigator({ Onboarding: OnBoarding, SignIn: SignIn });
+//Add OnBoarding to AuthScreens in the future
 export const Nav = createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import Color from '../components/color';
+import Header from '../components/Header';
 
 import { LineChart, XAxis, YAxis, StackedAreaChart, AreaChart, Grid} from 'react-native-svg-charts';
 import { Circle, G, Line, Rect, Text } from 'react-native-svg';
@@ -26,42 +27,46 @@ export default class Stats extends Component {
                 ]
 
         return (
-            <ScrollView>
-                <View>
-                    <View style={{flexDirection: 'row'}}>
-                        <YAxis style={{ height: 300, marginLeft: 10, marginRight: 5}}
-                                data={ data2 }
-                                contentInset={ contentInset }
-                                svg={{
-                                    fill: 'black',
-                                    fontSize: 10,
-                                }}
-                                numberOfTicks={ 10 }
-                                formatLabel={ value => `${value}ºC` }
-                        />
-                        <ScrollView horizontal={true} style={ { height: 350, paddingVertical: 16 } } bounces={true}>
-                            <View style={{width: 600, height: 300}}>
-                            <LineChart
-                                style={{ flex: 1, marginLeft: 22, marginBottom: 22,}}
-                                data={ data2 }
-                                svg={{ stroke: Color.DarkRed, strokeWidth: 2 }}
-                                contentInset={{ contentInset }}
-                                curve={shape.curveLinear}
-                            >
-                            <Grid/>
-                            </LineChart>
-                            <XAxis
-                            style={{ width: 615, marginHorizontal: -10 }}
-                            data={ data2 }
-                            formatLabel={ (value, index) => index }
-                            contentInset={{ left: 35, right: 0 }}
-                            svg={{ fontSize: 10, fill: 'black' }}
+            <View>
+                <Header/>
+                <ScrollView>
+                    <View>
+                        <View style={{flexDirection: 'row'}}>
+                            <YAxis style={{ height: 300, marginLeft: 10, marginRight: 5}}
+                                    data={ data2 }
+                                    contentInset={ contentInset }
+                                    svg={{
+                                        fill: 'black',
+                                        fontSize: 10,
+                                    }}
+                                    numberOfTicks={ 10 }
+                                    formatLabel={ value => `${value}ºC` }
                             />
-                            </View>
-                        </ScrollView>
+                            <ScrollView horizontal={true} style={ { height: 350, paddingVertical: 16 } } bounces={true}>
+                                <View style={{width: 600, height: 300}}>
+                                <LineChart
+                                    style={{ flex: 1, marginLeft: 22, marginBottom: 22,}}
+                                    data={ data2 }
+                                    svg={{ stroke: Color.DarkRed, strokeWidth: 2 }}
+                                    contentInset={{ contentInset }}
+                                    curve={shape.curveLinear}
+                                >
+                                <Grid/>
+                                </LineChart>
+                                <XAxis
+                                style={{ width: 615, marginHorizontal: -10 }}
+                                data={ data2 }
+                                formatLabel={ (value, index) => index }
+                                contentInset={{ left: 35, right: 0 }}
+                                svg={{ fontSize: 10, fill: 'black' }}
+                                />
+                                </View>
+                            </ScrollView>
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
+
         )
     }
 }

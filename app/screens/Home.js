@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, ScrollView, View, Dimensions} from 'react-native';
+import {StyleSheet, Text, StatusBar, ScrollView, View, Dimensions} from 'react-native';
 import { VictoryBar, VictoryScatter, VictoryLine, VictoryChart, VictoryTheme, VictoryAxis, VictoryStack, createContainer, VictoryZoomContainer, VictoryVoronoiContainer } from "victory-native";
 import Color from '../components/color';
+import Header from '../components/Header';
+
+
 const deviceWidth = Dimensions.get ('window').width;
 const deviceHeight = Dimensions.get ('window').height;
       
@@ -51,6 +54,10 @@ export default class Home extends Component {
   render() {
 
     return (
+      <View>
+      <View>
+          <Header/>
+        </View>
         <ScrollView scrollEnabled={this.state.scrollEnabled}>
             <VictoryChart
         domainPadding={20}
@@ -199,6 +206,7 @@ export default class Home extends Component {
 </VictoryChart>
 
  </ScrollView>
+ </View>
             );
         }
 }

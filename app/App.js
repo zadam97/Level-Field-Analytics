@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text,ScrollView, View, StatusBar} from 'react-native';
+import {Platform, StyleSheet, Text,ScrollView, View} from 'react-native';
 import {Tabs,Nav} from './config/navigation';
 import Header from './components/Header';
 import Color from './components/color';
@@ -12,14 +12,6 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={{ flex: 1}}>
-        <View>
-          <StatusBar
-              backgroundColor='#2E2E2E'
-              //^for android match with header background
-              barStyle="light-content"
-          />
-          <Header/>
-        </View>
         <View style={styles.navtab}>
           <Nav/>
         </View>
