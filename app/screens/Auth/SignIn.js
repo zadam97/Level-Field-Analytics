@@ -13,10 +13,10 @@ TextInput,
 TouchableWithoutFeedback, 
 KeyboardAvoidingView} from 'react-native';
 import { Button } from 'react-native-elements';
-import Color from '../components/color';
+import Color from '../../components/color';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import spinner from '../assets/images/loading.gif';
+import spinner from '../../assets/images/loading.gif';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -96,6 +96,7 @@ export default class SignIn extends Component {
 
 
     return (
+
       <KeyboardAvoidingView style={styles.containerView} behavior="padding">
 
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -153,12 +154,14 @@ export default class SignIn extends Component {
                     />
                 </Animated.View>
               </View>
+              <Button title="Firebase" onPress={() => {this.props.navigation.navigate('LogIn')}} />
+
+              <Button title="App" onPress={() => {this.props.navigation.navigate('App')}} />
             </View>
           
         </View>
       </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-
             );
         }
 
@@ -194,7 +197,7 @@ _signIn = async () => {
 } else {
       this._Animate();
       await AsyncStorage.setItem(this.state.name, this.state.password);
-      this.props.navigation.navigate('FireBaseSignIn');
+      this.props.navigation.navigate('App');
     }
     
   } catch (error) {

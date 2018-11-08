@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {AsyncStorage, StyleSheet, Button, Text, ScrollView, View, Dimensions} from 'react-native';
 import { VictoryZoomContainer, VictoryBrushContainer, VictoryBar, VictoryLine, VictoryChart, VictoryTheme, VictoryAxis, VictoryStack } from "victory-native";
-import Header from '../components/Header';
+import Header from '../../components/Header';
 
 const deviceWidth = Dimensions.get ('window').width;
 const deviceHeight = Dimensions.get ('window').height;

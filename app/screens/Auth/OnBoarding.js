@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, AsyncStorage, View, Button, Dimensions} from 'react-native';
-import Color from '../components/color';
+import Color from '../../components/color';
 const deviceWidth = Dimensions.get ('window').width;
 const deviceHeight = Dimensions.get ('window').height;
       
@@ -21,7 +21,7 @@ export default class OnBoarding extends Component {
 
     return (
             <View style={styles.container}>
-                 <Button title="OnBoarding Yay!" onPress={() => {this.props.navigation.navigate('SignIn')}} />
+                 <Button title="OnBoarding" onPress={() => {this.props.navigation.navigate('SignIn')}} />
             </View>
             );
         }

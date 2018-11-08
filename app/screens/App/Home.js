@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, AsyncStorage, ScrollView, View, Dimensions} from 'react-native';
 import { VictoryBar, VictoryScatter, VictoryLine, VictoryChart, VictoryTheme, VictoryAxis, VictoryStack, createContainer, VictoryZoomContainer, VictoryVoronoiContainer } from "victory-native";
-import Color from '../components/color';
-import Header from '../components/Header';
+import Color from '../../components/color';
+import Header from '../../components/Header';
 
 
 const deviceWidth = Dimensions.get ('window').width;

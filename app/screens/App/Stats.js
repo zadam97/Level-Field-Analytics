@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import Color from '../components/color';
-import Header from '../components/Header';
+import Color from '../../components/color';
+import Header from '../../components/Header';
 
 import { LineChart, XAxis, YAxis, StackedAreaChart, AreaChart, Grid} from 'react-native-svg-charts';
 import { Circle, G, Line, Rect, Text } from 'react-native-svg';

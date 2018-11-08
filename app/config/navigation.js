@@ -4,14 +4,16 @@ import { StackNavigator, createSwitchNavigator, createStackNavigator, TabNavigat
 import { Icon } from 'react-native-elements';
 import Color from '../components/color';
 
-import Home from '../screens/Home';
-import Stats from '../screens/Stats';
-import Settings from '../screens/Settings';
 
-import SignIn from '../screens/SignIn';
-import FireBaseSignIn from '../screens/FireBaseSignIn';
-import OnBoarding from '../screens/OnBoarding';
-import AuthLoadingScreen from '../screens/AuthLoadingScreen';
+import Home from '../screens/App/Home';
+import Stats from '../screens/App/Stats';
+import Settings from '../screens/App/Settings';
+
+
+import LogIn from '../screens/Auth/LogIn';
+import SignIn from '../screens/Auth/SignIn';
+import OnBoarding from '../screens/Auth/OnBoarding';
+import AuthLoadingScreen from '../screens/Auth/AuthLoadingScreen';
 
 
 
@@ -66,7 +68,7 @@ export const createRootNavigator = () => {
   )
 };
 
-export const AuthScreens = createStackNavigator({ Onboarding: OnBoarding, SignIn: SignIn, FireBaseSignIn: FireBaseSignIn },{ headerMode: 'none'});
+export const AuthScreens = createStackNavigator({ Onboarding: OnBoarding, LogIn: LogIn, SignIn: SignIn},{ headerMode: 'none'});
 //Add More OnBoarding to AuthScreens in the future if needed
 export const Nav = createSwitchNavigator(
   {
