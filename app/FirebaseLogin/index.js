@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { KeyboardAvoidingView, StyleSheet, ImageBackground } from 'react-native';
+import { KeyboardAvoidingView, View, StyleSheet, ImageBackground } from 'react-native';
 import Login from './screens/Login';
 import Register from './screens/Register';
 import ForgotPassword from './screens/ForgotPassword';
@@ -11,6 +11,7 @@ export default class FirebaseLogin extends Component {
 
   state = {
     currentScreen: 'login', // can be: 'login' or 'register' or 'forgot'
+    blur: 0,
   };
 
   changeScreen = screenName => () => {
@@ -26,12 +27,16 @@ export default class FirebaseLogin extends Component {
     this.props.mainApp();
   }
 
+  setBlur(blur){
+    this.setState.blur = blur;
+  }
+
   render() {
     let screenToShow;
 
     switch(this.state.currentScreen) {
       case 'login':
-        screenToShow = <Login change={this.changeScreen} success={this.userSuccessfullyLoggedIn} />;
+        screenToShow = <Login change={this.changeScreen} success={this.userSuccessfullyLoggedIn} setBlur={(blur) => {this.setBlur(blur)}}/>;
         break;
       case 'register':
         screenToShow = <Register change={this.changeScreen} mainAppx={() => {this.goToMainApp()}}/>;
@@ -42,20 +47,17 @@ export default class FirebaseLogin extends Component {
     }
 
     return (
-      <KeyboardAvoidingView
-        behavior="position"
-        keyboardVerticalOffset={-w(40)}
-        style={styles.container}
-      >
+      <View>
+      
         <ImageBackground
           source={this.props.background}
           style={styles.background}
           resizeMode="stretch"
-
+          blurRadius={this.state.blur}
         >
           {screenToShow}
         </ImageBackground>
-      </KeyboardAvoidingView>
+      </View>
     )
   }
 }

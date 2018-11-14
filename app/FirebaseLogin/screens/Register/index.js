@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {Alert, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Alert, View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {w, h, totalSize} from '../../api/Dimensions';
 import InputField from '../../components/InputField';
 import Continue from './Continue';
 import Firebase from "../../api/Firebase";
-
+import DismissKeyboard from 'dismissKeyboard';
+import Color from '../../../components/color';
 const email = require('../../assets/email.png');
 const password = require('../../assets/password.png');
 const repeat = require('../../assets/repeat.png');
@@ -18,6 +19,7 @@ export default class Register extends Component {
     isPasswordCorrect: false,
     isRepeatCorrect: false,
     isCreatingAccount: false,
+
   };
 
   createUserAccount = () => {
@@ -76,10 +78,26 @@ export default class Register extends Component {
     }
   };
 
+
   render() {
+    if(Platform.OS == 'ios'){
+
     return(
+
+      <TouchableWithoutFeedback onPress={() =>{DismissKeyboard()}}>
+
       <View style={styles.container}>
-        <Text style={styles.create}>CREATE ACCOUNT</Text>
+        
+        <Text style={styles.create}>Create Account</Text>
+
+        <KeyboardAvoidingView
+        enabled={Platform.OS === 'ios' ? true : false}
+        behavior="position"
+        keyboardVerticalOffset={-h(5)}
+        style={styles.keyboardContainer}
+        
+      >
+
         <InputField
           placeholder="Name"
           autoCapitalize="words"
@@ -119,11 +137,72 @@ export default class Register extends Component {
           icon={repeat}
         />
         <Continue isCreating={this.state.isCreatingAccount} click={this.createUserAccount}/>
+
+        </KeyboardAvoidingView>
+
         <TouchableOpacity onPress={this.props.change('login')} style={styles.touchable}>
-          <Text style={styles.signIn}>{'<'} Sign In</Text>
+          <Text style={styles.signIn}>{'<'} Back to Login</Text>
         </TouchableOpacity>
       </View>
-    )
+      </TouchableWithoutFeedback>
+      )
+    } else {
+
+      return(
+
+      <TouchableWithoutFeedback onPress={() =>{DismissKeyboard()}}>
+
+      <View style={styles.containerAndroid}>
+        
+        <Text style={styles.createAndroid}>Create Account</Text>
+
+        <InputField
+          placeholder="Name"
+          autoCapitalize="words"
+          error={this.state.isNameCorrect}
+          style={styles.input}
+          focus={this.changeInputFocus}
+          ref={ref => this.name = ref}
+          icon={person}
+        />
+        <InputField
+          placeholder="Email"
+          keyboardType="email-address"
+          error={this.state.isEmailCorrect}
+          style={styles.input}
+          focus={this.changeInputFocus}
+          ref={ref => this.email = ref}
+          icon={email}
+        />
+        <InputField
+          placeholder="Password"
+          error={this.state.isPasswordCorrect}
+          style={styles.input}
+          focus={this.changeInputFocus}
+          ref={ref => this.password = ref}
+          secureTextEntry={true}
+          icon={password}
+        />
+        <InputField
+          placeholder="Repeat Password"
+          error={this.state.isRepeatCorrect}
+          style={styles.input}
+          secureTextEntry={true}
+          returnKeyType="done"
+          blurOnSubmit={true}
+          focus={this.changeInputFocus}
+          ref={ref => this.repeat = ref}
+          icon={repeat}
+        />
+        <Continue isCreating={this.state.isCreatingAccount} click={this.createUserAccount}/>
+
+        <TouchableOpacity onPress={this.props.change('login')} style={styles.touchableAndroid}>
+          <Text style={styles.signIn}>{'<'} Back to Login</Text>
+        </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
+      )
+    }
   }
 }
 
@@ -137,22 +216,49 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  containerAndroid: {
+    //flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  keyboardContainer: {
+    flex: 1,
+    alignItems: 'center',
+    //width: '100%',
+    height: '100%',
+  },
   create: {
     color:'white',
-    fontSize: totalSize(2.4),
-    marginTop: h(7),
-    marginBottom: h(4),
+    fontSize: totalSize(3.5),
+    marginTop: h(6),
+    marginBottom: h(15),
     fontWeight: '700',
   },
+  createAndroid: {
+    //fontSize: 45,
+    fontSize: totalSize(3.5),
+    fontWeight: "700",
+    color: 'white',
+    marginTop: h(6),
+    marginBottom: h(6),
+    textAlign: 'center',
+  },
   signIn: {
-    color:'#ffffffEE',
+    color:'white',
     fontSize: totalSize(2),
     fontWeight: '700',
+    marginBottom: h(8),
   },
   touchable: {
     alignSelf: 'flex-start',
     marginLeft: w(8),
     marginTop: h(4),
+  },
+  touchableAndroid: {
+    alignSelf: 'flex-start',
+    marginLeft: w(8),
+    marginTop: h(24),
+    marginBottom: h(8)
   },
   input: {
     marginVertical: h(2),

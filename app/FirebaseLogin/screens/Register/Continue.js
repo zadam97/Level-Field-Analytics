@@ -6,6 +6,7 @@ import {w, h, totalSize} from "../../api/Dimensions";
 export default class Continue extends Component {
   render() {
     return (
+
       <TouchableOpacity
         activeOpacity={0.5}
         onPress={this.props.click}
@@ -14,6 +15,7 @@ export default class Continue extends Component {
         ? <ActivityIndicator size="large" style={styles.spinner} color='white' />
         : <Text style={styles.text}>Continue</Text>}
       </TouchableOpacity>
+
     );
   }
 }

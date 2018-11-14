@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, TextInput} from 'react-native';
+import { Platform, StyleSheet, View, Image, TextInput} from 'react-native';
 import {w, h, totalSize} from '../api/Dimensions';
-
+import Color from "../../components/color";
 const close = require('../assets/close.png');
 
 export default class InputField extends Component {
   state = {
     text: ''
   };
+//        <Image style={styles.icon} source={this.props.icon}/>
 
   getInputValue = () => this.state.text;
 
   render() {
     return (
       <View style={[styles.container, this.props.style, this.props.error ? styles.containerError : {}]}>
-        <Image style={styles.icon} source={this.props.icon}/>
+      
+      <Image style={styles.icon} source={this.props.icon}/>
+
+
         <TextInput
           style={styles.inputText}
           value={this.state.text}
@@ -29,7 +33,7 @@ export default class InputField extends Component {
           returnKeyType={this.props.returnKeyType}
           placeholder={this.props.placeholder}
           onSubmitEditing={this.props.focus(this.props.placeholder)}
-          placeholderTextColor="#ffffffDD"
+          placeholderTextColor={Color.LightGrey}
           onChangeText={(text) => this.setState({ text })}
         />
         {this.props.error && <Image style={styles.iconError} source={close}/>}
@@ -52,33 +56,40 @@ InputField.defaultProps = {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff44',
     flexDirection: 'row',
-    paddingVertical: w(3.4),
-    //borderRadius: w(10),
-    //borderColor: '#ddd',
-    //borderWidth: 1,
+    paddingVertical: (Platform.OS === 'ios' ? h(2.5) : -h(4)),
     width: '85%',
+    borderBottomColor: Color.White,
+    borderBottomWidth: 1,
+    paddingBottom: (Platform.OS === 'ios' ? h(1) : -h(3))
+
   },
   containerError: {
-    backgroundColor: '#EF9A9A88',
-    borderWidth: 1,
-    borderColor: '#E57373',
+    //backgroundColor: '#EF9A9A88',
+    //borderWidth: 1,
+    //boorderColor: Color.LightRed,
+    //Add Error Views Here
   },
   inputText: {
-    color: 'white',
+    color: Color.White, //This is the actual color not hint
+    opacity: 50,
     flex: 1,
     fontSize: totalSize(2.1),
     marginLeft: w(3),
+    marginBottom: (Platform.OS === 'ios' ? 0 : -h(0)),
+    //backgroundColor: Color.DarkGrey
+
+
   },
   icon: {
-    marginLeft: w(4),
-    width: w(7),
-    height: w(7),
+    marginLeft: w(2),
+    width: (Platform.OS === 'ios' ? w(7) : w(9)),
+    height: (Platform.OS === 'ios' ? w(7) : w(9)),
+
   },
   iconError: {
-    width: w(7),
-    height: w(7),
+    width: w(6),
+    height: w(6),
     marginRight: w(3),
   },
 });

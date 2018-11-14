@@ -6,21 +6,32 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import firebase from "firebase";
+var config = {
+    apiKey: "AIzaSyB2inbzuH_x5xevuC8ZxYWw4vfrmqfgE6M",
+    authDomain: "level-field.firebaseapp.com",
+    databaseURL: "https://level-field.firebaseio.com",
+    projectId: "level-field",
+    storageBucket: "level-field.appspot.com",
+    messagingSenderId: "806202871591"
+  };
+  //firebase.initializeApp(config);
 
 export default class AuthLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
-    this._bootstrapAsync();
   }
+componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.navigation.navigate('App');
+      } else {
+        this.props.navigation.navigate('Auth');
+      }
+    });
+}
+    
 
-  // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken');
-
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-  };
 
   // Render any loading content that you like here
   render() {

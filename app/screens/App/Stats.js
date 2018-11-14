@@ -2,13 +2,30 @@ import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import Color from '../../components/color';
 import Header from '../../components/Header';
-
+import { VictoryZoomContainer, VictoryBrushContainer, VictoryBar, VictoryLine, VictoryChart, VictoryTheme, VictoryAxis, VictoryStack } from "victory-native";
 import { LineChart, XAxis, YAxis, StackedAreaChart, AreaChart, Grid} from 'react-native-svg-charts';
 import { Circle, G, Line, Rect, Text } from 'react-native-svg';
 
 import * as shape from 'd3-shape';
 
 export default class Stats extends Component {
+
+    constructor() {
+        super();
+        this.state ={};
+      }
+
+
+
+      handleZoom(domain) {
+        this.setState({selectedDomain: domain});
+      }
+    
+      handleBrush(domain) {
+        this.setState({zoomDomain: domain});
+      }
+
+
     render() {
 
         const data2 = [ 50, 10, 40, 75, -4, -24, 67, 81, 35, 53, -53, 24, 50, -20, -80, 0, 0, 80, -30, 4, 5, 6, 10 ]
@@ -29,7 +46,7 @@ export default class Stats extends Component {
         return (
             <View>
                 <Header/>
-                <ScrollView>
+                <ScrollView contentInset= {{top: 20, left: 0, bottom: 120, right: 0}}>
                     <View>
                         <View style={{flexDirection: 'row'}}>
                             <YAxis style={{ height: 300, marginLeft: 10, marginRight: 5}}
@@ -64,6 +81,74 @@ export default class Stats extends Component {
                             </ScrollView>
                         </View>
                     </View>
+
+                    <VictoryChart width={400} height={350} scale={{x: "time"}}
+                    containerComponent={
+                    <VictoryZoomContainer responsive={false}
+                        zoomDimension="x"
+                        zoomDomain={this.state.zoomDomain}
+                        onZoomDomainChange={this.handleZoom.bind(this)}
+                    />
+                    }
+                    >
+                    <VictoryLine
+                    style={{
+                        data: {stroke: "tomato"}
+                    }}
+                    data={[
+                        {x: new Date(1982, 1, 1), y: 125},
+                        {x: new Date(1987, 1, 1), y: 257},
+                        {x: new Date(1993, 1, 1), y: 345},
+                        {x: new Date(1997, 1, 1), y: 515},
+                        {x: new Date(2001, 1, 1), y: 132},
+                        {x: new Date(2005, 1, 1), y: 305},
+                        {x: new Date(2011, 1, 1), y: 270},
+                        {x: new Date(2015, 1, 1), y: 470}
+                    ]}
+                    />
+                    </VictoryChart>
+
+                    <VictoryChart
+                    padding={{top: 0, left: 50, right: 50, bottom: 30}}
+                    width={400} height={120} scale={{x: "time"}}
+                    containerComponent={
+                        <VictoryBrushContainer responsive={false}
+                        brushDimension="x"
+                        brushDomain={this.state.selectedDomain}
+                        onBrushDomainChange={this.handleBrush.bind(this)}
+                        />
+                    }
+                    >
+                    <VictoryAxis
+                        tickValues={[
+                        new Date(1985, 1, 1),
+                        new Date(1990, 1, 1),
+                        new Date(1995, 1, 1),
+                        new Date(2000, 1, 1),
+                        new Date(2005, 1, 1),
+                        new Date(2010, 1, 1)
+                        ]}
+                        tickFormat={(x) => new Date(x).getFullYear()}
+                    />
+                    <VictoryLine
+                        style={{
+                        data: {stroke: "tomato"}
+                        }}
+                        data={[
+                        {x: new Date(1982, 1, 1), y: 125},
+                        {x: new Date(1987, 1, 1), y: 257},
+                        {x: new Date(1993, 1, 1), y: 345},
+                        {x: new Date(1997, 1, 1), y: 515},
+                        {x: new Date(2001, 1, 1), y: 132},
+                        {x: new Date(2005, 1, 1), y: 305},
+                        {x: new Date(2011, 1, 1), y: 270},
+                        {x: new Date(2015, 1, 1), y: 470}
+                        ]}
+                    />
+                    </VictoryChart>
+                    <Text style={styles.title}>
+                    Cool Charts
+                    </Text>
                 </ScrollView>
             </View>
 

@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { Alert, StyleSheet, View, TouchableOpacity, Text, Image, } from 'react-native';
+import { Platform, TouchableWithoutFeedback, Alert, Keyboard, StyleSheet, KeyboardAvoidingView, View, TouchableOpacity, Text, Image, } from 'react-native';
 import InputField from "../../components/InputField";
 import {w, h, totalSize} from '../../api/Dimensions';
+import LinearGradient from 'react-native-linear-gradient';
+import { LinearTextGradient } from 'react-native-text-gradient';
 import GetStarted from './GetStarted';
 import Firebase from '../../api/Firebase';
 import Color from '../../../components/color';
+import DismissKeyboard from 'dismissKeyboard';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
+
 const companyLogo = require('../../assets/companylogo.png');
 const email = require('../../assets/email.png');
 const password = require('../../assets/password.png');
@@ -51,11 +57,48 @@ export default class Login extends Component {
       });
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
+  componentDidMount () {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  }
 
-        <Text style={styles.logoText}>Level Field</Text>
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow () {
+    //REdux
+  }
+
+
+  _keyboardDidHide () {
+    //IMPLEMENT REDUX
+  }
+
+  render() {
+    if(Platform.OS == 'ios'){
+      
+    
+    return (
+      <TouchableWithoutFeedback onPress={() =>{DismissKeyboard()}}>
+ 
+      <View style={styles.container}>          
+          <LinearTextGradient
+            style={styles.logoText}
+            locations={[0, 1]}
+            colors={[Color.White, Color.White]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+          >Level Field</LinearTextGradient>
+
+        <KeyboardAvoidingView
+        enabled={Platform.OS === 'ios' ? true : false}
+        behavior='position'
+        keyboardVerticalOffset={-w(35)}
+        style={styles.keyboardContainer}
+        
+      >
         <InputField
           placeholder="Email"
           keyboardType="email-address"
@@ -76,9 +119,11 @@ export default class Login extends Component {
           icon={password}
         />
         <GetStarted
+          style={styles.Login}
           click={this.getStarted}
           isLogin={this.state.isLogin}
         />
+        </KeyboardAvoidingView>
         <View style={styles.textContainer}>
           <TouchableOpacity onPress={this.props.change('register')} style={styles.touchable} activeOpacity={0.6}>
             <Text style={styles.createAccount}>Create Account</Text>
@@ -88,7 +133,58 @@ export default class Login extends Component {
           </TouchableOpacity>
         </View>
       </View>
+      </TouchableWithoutFeedback>
     )
+    } else {
+      return (
+        //Android
+        <TouchableWithoutFeedback onPress={() =>{DismissKeyboard()}}>
+   
+        <View style={styles.container}>          
+            <LinearTextGradient
+              style={styles.logoTextAndroid}
+              locations={[0, 1]}
+              colors={[Color.White, Color.White]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            >Level Field</LinearTextGradient>
+          
+          <InputField
+            placeholder="Email"
+            keyboardType="email-address"
+            style={styles.email}
+            error={this.state.isEmailCorrect}
+            focus={this.changeInputFocus}
+            ref={ref => this.email = ref}
+            icon={email}
+          />
+          <InputField
+            placeholder="Password"
+            returnKeyType="done"
+            secureTextEntry={true}
+            blurOnSubmit={true}
+            error={this.state.isPasswordCorrect}
+            ref={ref => this.password = ref}
+            focus={this.changeInputFocus}
+            icon={password}
+          />
+          <GetStarted
+            style={styles.Login}
+            click={this.getStarted}
+            isLogin={this.state.isLogin}
+          />
+          <View style={styles.textContainerAndroid}>
+            <TouchableOpacity onPress={this.props.change('register')} style={styles.touchable} activeOpacity={0.6}>
+              <Text style={styles.createAccount}>Create Account</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.props.change('forgot')} style={styles.touchable} activeOpacity={0.6}>
+              <Text style={styles.forgotPassword}>Forgot Password</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        </TouchableWithoutFeedback>
+      )
+    }
   }
 }
 
@@ -96,7 +192,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: Color.LightTeal,
+  },
+  keyboardContainer: {
+    flex: 1,
+    alignItems: 'center',
+    //width: '100%',
+    height: '100%',
   },
   icon: {
     width: w(70),
@@ -107,7 +208,16 @@ const styles = StyleSheet.create({
   textContainer: {
     width: w(100),
     flexDirection: 'row',
-    marginTop: h(5),
+    //marginTop: h(18),
+    marginBottom: h(8),
+
+  },
+  textContainerAndroid: {
+    width: w(100),
+    flexDirection: 'row',
+    marginTop: h(28),
+    marginBottom: h(8),
+
   },
   email: {
     marginBottom: h(4.5),
@@ -130,8 +240,22 @@ const styles = StyleSheet.create({
   logoText: {
     fontSize: 45,
     fontWeight: "800",
-    marginTop: 150,
-    marginBottom: 150,
+    color: Color.White,
+    marginTop: h(12),
+    marginBottom: h(18),
     textAlign: 'center',
+  },
+  logoTextAndroid: {
+    fontSize: 45,
+    fontWeight: "800",
+    color: Color.White,
+    marginTop: h(12),
+    marginBottom: h(12),
+    textAlign: 'center',
+  },
+  Login: {
+    flex: 1,
+    alignItems: 'center',
+    width: '85%',
   },
 });

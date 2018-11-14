@@ -16,6 +16,8 @@ import { Button } from 'react-native-elements';
 import Color from '../../components/color';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
+import GradientButton from 'react-native-gradient-buttons';
+import LinearGradient from 'react-native-linear-gradient';
 import spinner from '../../assets/images/loading.gif';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
@@ -136,7 +138,7 @@ export default class SignIn extends Component {
                       returnKeyType={"done"}
 
                     />
-                </View>
+              </View>
               <View style={styles.container}>
                 <Animated.View style={{width: changeWidth}}>
                     <TouchableOpacity
@@ -154,10 +156,12 @@ export default class SignIn extends Component {
                     />
                 </Animated.View>
               </View>
+
               <Button title="Firebase" onPress={() => {this.props.navigation.navigate('LogIn')}} />
 
               <Button title="App" onPress={() => {this.props.navigation.navigate('App')}} />
             </View>
+
           
         </View>
       </TouchableWithoutFeedback>
@@ -310,5 +314,18 @@ const styles = StyleSheet.create({
   image: {
     width: 24,
     height: 24,
+    
   },
+  buttonContainer: {
+    width: 200,
+    alignItems: 'center',
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: '#4C64FF',
+    padding: 15,
+   // marginLeft: 1,
+   // marginRight: 1,
+    width: 200
+}
 });

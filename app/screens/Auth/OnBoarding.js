@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import {StyleSheet, AsyncStorage, View, Button, Dimensions} from 'react-native';
+import {SafeAreaView, StyleSheet, AsyncStorage, View, Button, Dimensions} from 'react-native';
 import Color from '../../components/color';
+import LinearGradient from 'react-native-linear-gradient';
+//import Dimensions from 'Dimensions';
+
 const deviceWidth = Dimensions.get ('window').width;
 const deviceHeight = Dimensions.get ('window').height;
       
@@ -20,16 +23,21 @@ export default class OnBoarding extends Component {
   render() {
 
     return (
+
             <View style={styles.container}>
-                 <Button title="OnBoarding" onPress={() => {this.props.navigation.navigate('SignIn')}} />
+            <LinearGradient colors={[Color.LightRed, Color.DarkRed]} style={styles.gradient}>
+              <View style={styles.body}>
+              <Button color='white' title="OnBoarding" onPress={() => {this.props.navigation.navigate('LogIn')}} />
+              </View>
+            </LinearGradient>
             </View>
             );
         }
 }
 const styles = StyleSheet.create({
   body: {
+    //height: 400,
     flex: 1,
-    paddingTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 30,
@@ -44,5 +52,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  }
+  },
+  gradient: {
+    //flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5,
+    width: deviceWidth,
+    height: deviceHeight,
+  },
 });

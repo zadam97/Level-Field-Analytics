@@ -11,4 +11,5 @@ export default {
   Green: '#BADA55',
   Orange: '#FFA500',
   DarkTeal: '#348482',
+  LightGrey: "#CDCDCD",
 };

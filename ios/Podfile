@@ -12,6 +12,8 @@ target 'LFNative' do
     # Pods for testing
     pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+    pod 'react-native-haptic', :path => '../node_modules/react-native-haptic'
+
   end
 
   target 'LFNativeTests' do
