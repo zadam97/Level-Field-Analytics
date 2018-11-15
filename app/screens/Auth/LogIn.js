@@ -22,7 +22,7 @@ export default class LogIn extends Component {
             barStyle="light-content"
             />
             <FirebaseLogin  
-            login={user => console.warn("Welcome")}  
+            //login={//Something Here} 
             background={wallpaper}
             mainApp={() => {this.props.navigation.navigate('App')}}            
             />

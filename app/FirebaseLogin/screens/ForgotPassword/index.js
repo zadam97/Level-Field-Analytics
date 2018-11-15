@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback, Text } from 'react-native';
+import { Alert, Platform, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback, Text } from 'react-native';
 import { w, h, totalSize } from "../../api/Dimensions";
 import InputField from '../../components/InputField';
 import Firebase from '../../api/Firebase';
@@ -22,7 +22,7 @@ export default class ForgotPassword extends Component {
       if(email !== ''){
         this.sendEmailWithPassword(email);
       } else {
-        console.warn('Enter correct e-mail address');
+        Alert.alert('Enter correct e-mail address');
       }
     });
   };

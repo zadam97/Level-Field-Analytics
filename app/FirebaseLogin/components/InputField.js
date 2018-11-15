@@ -3,6 +3,10 @@ import { Platform, StyleSheet, View, Image, TextInput} from 'react-native';
 import {w, h, totalSize} from '../api/Dimensions';
 import Color from "../../components/color";
 const close = require('../assets/close.png');
+const closeRed = require('../assets/closeRed.png');
+const astrixRed = require('../assets/astrixRed.png');
+
+
 
 export default class InputField extends Component {
   state = {
@@ -36,7 +40,7 @@ export default class InputField extends Component {
           placeholderTextColor={Color.LightGrey}
           onChangeText={(text) => this.setState({ text })}
         />
-        {this.props.error && <Image style={styles.iconError} source={close}/>}
+        {this.props.error && <Image style={styles.iconError} source={astrixRed}/>}
       </View>
     );
   }

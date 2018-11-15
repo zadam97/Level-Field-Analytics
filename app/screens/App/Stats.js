@@ -5,6 +5,9 @@ import Header from '../../components/Header';
 import { VictoryZoomContainer, VictoryBrushContainer, VictoryBar, VictoryLine, VictoryChart, VictoryTheme, VictoryAxis, VictoryStack } from "victory-native";
 import { LineChart, XAxis, YAxis, StackedAreaChart, AreaChart, Grid} from 'react-native-svg-charts';
 import { Circle, G, Line, Rect, Text } from 'react-native-svg';
+import PureChart from 'react-native-pure-chart';
+
+
 
 import * as shape from 'd3-shape';
 
@@ -42,6 +45,32 @@ export default class Stats extends Component {
                     { onPress: () => console.log('cherries') },
                     { onPress: () => console.log('dates') },
                 ]
+
+        let sampleData = [
+            {
+                seriesName: 'series1',
+                data: [
+                {x: '2018-02-01', y: 30},
+                {x: '2018-02-02', y: 200},
+                {x: '2018-02-03', y: 170},
+                {x: '2018-02-04', y: 250},
+                {x: '2018-02-05', y: 10}
+                ],
+                color: '#297AB1'
+            },
+            {
+                seriesName: 'series2',
+                data: [
+                {x: '2018-02-01', y: 20},
+                {x: '2018-02-02', y: 100},
+                {x: '2018-02-03', y: 140},
+                {x: '2018-02-04', y: 550},
+                {x: '2018-02-05', y: 40}
+                ],
+                color: 'yellow'
+            }
+            ]
+           
 
         return (
             <View>
@@ -146,6 +175,12 @@ export default class Stats extends Component {
                         ]}
                     />
                     </VictoryChart>
+                    <PureChart data={sampleData} type='line'
+                    height={300}
+                    width = {'95%'}
+                    
+                    />
+                    
                     <Text style={styles.title}>
                     Cool Charts
                     </Text>

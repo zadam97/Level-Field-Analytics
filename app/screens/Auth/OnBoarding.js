@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import {SafeAreaView, StyleSheet, AsyncStorage, View, Button, Dimensions} from 'react-native';
+import {SafeAreaView, Text, Image, StyleSheet, AsyncStorage, View, Dimensions} from 'react-native';
 import Color from '../../components/color';
 import LinearGradient from 'react-native-linear-gradient';
+import { LinearTextGradient } from 'react-native-text-gradient';
+import Sketch from '../../assets/images/footballSketch.jpg';
+import {Button} from 'react-native-elements';
 //import Dimensions from 'Dimensions';
 
 const deviceWidth = Dimensions.get ('window').width;
@@ -16,37 +19,47 @@ export default class OnBoarding extends Component {
   static navigationOptions = {
     title: 'Onboarding',
     headerStyle: {
-        backgroundColor: '#f5fcff',
+        backgroundColor: 'white',
       },
   };
 
   render() {
 
     return (
-
-            <View style={styles.container}>
-            <LinearGradient colors={[Color.LightRed, Color.DarkRed]} style={styles.gradient}>
-              <View style={styles.body}>
-              <Button color='white' title="OnBoarding" onPress={() => {this.props.navigation.navigate('LogIn')}} />
-              </View>
-            </LinearGradient>
-            </View>
+            <SafeAreaView style={styles.container}>
+              <LinearTextGradient
+              style={styles.logoText}
+              locations={[0, 1]}
+              colors={['red', 'blue']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            >
+              Level Field
+              </LinearTextGradient>  
+              <Image source={Sketch} style={{ width: '100%', height: 250, marginBottom: 40}}/>
+              <Text style={{marginBottom: 150, fontSize: 20,textAlign: 'center', fontWeight: 'bold'}}>
+                Creating a Level Playing Field for All Amateur Athletes
+              </Text>
+              <Button title="Continue" buttonStyle={{
+              backgroundColor: Color.DarkTeal,
+              width: 300,
+              height: 45,
+              borderColor: "transparent",
+              borderWidth: 0,
+              borderRadius: 5}}
+              onPress={() => {this.props.navigation.navigate('LogIn')}} />
+            </SafeAreaView>
             );
         }
 }
 const styles = StyleSheet.create({
-  body: {
-    //height: 400,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 30,
-  },
+  
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#f5fcff"
+    backgroundColor: "white",
+    paddingBottom: 20
   },
   title: {
     fontSize: 20,
@@ -60,5 +73,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: deviceWidth,
     height: deviceHeight,
+  },
+  button: {
+    //flex: 1,
+    borderColor: Color.Black,
+    color: Color.LightRed,
+    borderWidth: 1,
+    marginTop: 150,
+    marginBottom: 30
+  },
+  logoText: {
+    fontSize: 45,
+    fontWeight: "800",
+    color: Color.BlackX,
+    marginTop: 50,
+    marginBottom: 60,
+    textAlign: 'center',
   },
 });

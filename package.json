@@ -20,6 +20,8 @@
     "react-native-keyboard-aware-scroll-view": "^0.7.4",
     "react-native-keyboard-spacer": "^0.4.1",
     "react-native-linear-gradient": "^2.4.3",
+    "react-native-pure-chart": "0.0.24",
+    "react-native-responsive-linechart": "^1.4.8",
     "react-native-svg": "^8.0.8",
     "react-native-svg-charts": "^5.2.0",
     "react-native-text-gradient": "0.0.16",

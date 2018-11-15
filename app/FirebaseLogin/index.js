@@ -27,16 +27,12 @@ export default class FirebaseLogin extends Component {
     this.props.mainApp();
   }
 
-  setBlur(blur){
-    this.setState.blur = blur;
-  }
-
   render() {
     let screenToShow;
 
     switch(this.state.currentScreen) {
       case 'login':
-        screenToShow = <Login change={this.changeScreen} success={this.userSuccessfullyLoggedIn} setBlur={(blur) => {this.setBlur(blur)}}/>;
+        screenToShow = <Login change={this.changeScreen} success={this.userSuccessfullyLoggedIn} />;
         break;
       case 'register':
         screenToShow = <Register change={this.changeScreen} mainAppx={() => {this.goToMainApp()}}/>;
@@ -63,7 +59,7 @@ export default class FirebaseLogin extends Component {
 }
 
 FirebaseLogin.propTypes = {
-  login: PropTypes.func.isRequired,
+  //login: PropTypes.func.isRequired,
 };
 
 FirebaseLogin.defaultProps = {

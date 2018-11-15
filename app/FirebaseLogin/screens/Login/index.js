@@ -4,14 +4,13 @@ import InputField from "../../components/InputField";
 import {w, h, totalSize} from '../../api/Dimensions';
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearTextGradient } from 'react-native-text-gradient';
-import GetStarted from './GetStarted';
+import LogMeIn from './LogMeIn';
 import Firebase from '../../api/Firebase';
 import Color from '../../../components/color';
 import DismissKeyboard from 'dismissKeyboard';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 
-const companyLogo = require('../../assets/companylogo.png');
 const email = require('../../assets/email.png');
 const password = require('../../assets/password.png');
 
@@ -23,7 +22,7 @@ export default class Login extends Component {
     isLogin: false,
   };
 
-  getStarted = () => {
+  LogMeIn = () => {
     const email = this.email.getInputValue();
     const password = this.password.getInputValue();
 
@@ -68,7 +67,7 @@ export default class Login extends Component {
   }
 
   _keyboardDidShow () {
-    //REdux
+    //
   }
 
 
@@ -118,9 +117,9 @@ export default class Login extends Component {
           focus={this.changeInputFocus}
           icon={password}
         />
-        <GetStarted
+        <LogMeIn
           style={styles.Login}
-          click={this.getStarted}
+          click={this.LogMeIn}
           isLogin={this.state.isLogin}
         />
         </KeyboardAvoidingView>
@@ -168,9 +167,9 @@ export default class Login extends Component {
             focus={this.changeInputFocus}
             icon={password}
           />
-          <GetStarted
+          <LogMeIn
             style={styles.Login}
-            click={this.getStarted}
+            click={this.LogMeIn}
             isLogin={this.state.isLogin}
           />
           <View style={styles.textContainerAndroid}>

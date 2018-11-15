@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Color from '../../../components/color';
 import {w, h, totalSize} from '../../api/Dimensions';
 
-export default class GetStarted extends Component {
+export default class LogMeIn extends Component {
   render() {
     return (
 
@@ -21,7 +21,7 @@ export default class GetStarted extends Component {
   }
 }
 
-GetStarted.propTypes = {
+LogMeIn.propTypes = {
   click: PropTypes.func.isRequired,
   isLogin: PropTypes.bool.isRequired,
 };
@@ -33,9 +33,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
+    //backgroundColor: 'white',
     paddingVertical: w(2),
     borderRadius: w(10),
-    borderColor: '#E0E0E0',
+    borderColor: 'white',
     borderWidth: 1,
     marginTop: h(7),
   },
