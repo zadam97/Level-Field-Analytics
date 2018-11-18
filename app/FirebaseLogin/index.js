@@ -6,13 +6,13 @@ import Register from './screens/Register';
 import ForgotPassword from './screens/ForgotPassword';
 import { w } from './api/Dimensions';
 import { Alert } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class FirebaseLogin extends Component {
+class FirebaseLogin extends Component {
 
   state = {
     currentScreen: 'login', // can be: 'login' or 'register' or 'forgot'
-    blur: 0,
-  };
+    };
 
   changeScreen = screenName => () => {
     this.setState({ currentScreen: screenName });
@@ -49,7 +49,7 @@ export default class FirebaseLogin extends Component {
           source={this.props.background}
           style={styles.background}
           resizeMode="stretch"
-          blurRadius={this.state.blur}
+          blurRadius={this.props.blur}
         >
           {screenToShow}
         </ImageBackground>
@@ -65,6 +65,14 @@ FirebaseLogin.propTypes = {
 FirebaseLogin.defaultProps = {
   background: null,
 };
+
+const mapStateToProps = (state, ownProps) => {
+  return{
+    blur: state.authBlur.blur //grt rid of this to get rid of keyboard blur
+  }
+}
+
+export default connect(mapStateToProps)(FirebaseLogin)
 
 const styles = StyleSheet.create({
   container: {

@@ -9,7 +9,8 @@ import Firebase from '../../api/Firebase';
 import Color from '../../../components/color';
 import DismissKeyboard from 'dismissKeyboard';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-
+import { connect } from 'react-redux';
+import store from '../../../redux/store';
 
 const email = require('../../assets/email.png');
 const password = require('../../assets/password.png');
@@ -67,12 +68,12 @@ export default class Login extends Component {
   }
 
   _keyboardDidShow () {
-    //
+    store.dispatch({type: 'BLUR'})
   }
 
 
   _keyboardDidHide () {
-    //IMPLEMENT REDUX
+    store.dispatch({type: 'unBLUR'})
   }
 
   render() {

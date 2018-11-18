@@ -7,6 +7,9 @@ import Continue from './Continue';
 import Firebase from "../../api/Firebase";
 import DismissKeyboard from 'dismissKeyboard';
 import Color from '../../../components/color';
+import store from '../../../redux/store';
+
+
 const email = require('../../assets/email.png');
 const password = require('../../assets/password.png');
 const repeat = require('../../assets/repeat.png');
@@ -78,6 +81,24 @@ export default class Register extends Component {
     }
   };
 
+  componentDidMount () {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow () {
+    store.dispatch({type: 'BLUR'})
+  }
+
+
+  _keyboardDidHide () {
+    store.dispatch({type: 'unBLUR'})
+  }
 
   render() {
     if(Platform.OS == 'ios'){

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, AsyncStorage, ScrollView, View, Dimensions} from 'react-native';
 import { VictoryBar, VictoryScatter, VictoryLine, VictoryChart, VictoryTheme, VictoryAxis, VictoryStack, createContainer, VictoryZoomContainer, VictoryVoronoiContainer } from "victory-native";
+import LineChart from "react-native-responsive-linechart";
+
 import Color from '../../components/color';
 import Header from '../../components/Header';
 
@@ -46,10 +48,18 @@ const data2012 = [
     { x: 5, y: 7 }
   ];
 
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { scrollEnabled: true };
+    this.state = {
+       scrollEnabled: true,
+       offset: 0,
+    };
+  }
+
+  _onScroll(e) {
+    this.setState({ offset: e.nativeEvent.contentOffset.x });
   }
   render() {
 
@@ -59,7 +69,8 @@ export default class Home extends Component {
           <Header/>
         </View>
         <ScrollView scrollEnabled={this.state.scrollEnabled}>
-            <VictoryChart
+           
+      <VictoryChart
         domainPadding={20}
         theme={VictoryTheme.material}
       >

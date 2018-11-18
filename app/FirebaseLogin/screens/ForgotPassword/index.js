@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Platform, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback, Text } from 'react-native';
+import { Alert, Keyboard, Platform, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback, Text } from 'react-native';
 import { w, h, totalSize } from "../../api/Dimensions";
 import InputField from '../../components/InputField';
 import Firebase from '../../api/Firebase';
 import DismissKeyboard from 'dismissKeyboard';
-
+import store from '../../../redux/store';
 const email = require('../../assets/email.png');
 
 export default class ForgotPassword extends Component {
@@ -37,6 +37,25 @@ export default class ForgotPassword extends Component {
   onFocusChanged = () => {
     this.setState({ isEmailCorrect: this.email.getInputValue() == '' });
   };
+
+  componentDidMount () {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow () {
+    store.dispatch({type: 'BLUR'})
+  }
+
+
+  _keyboardDidHide () {
+    store.dispatch({type: 'unBLUR'})
+  }
 
   render(){
     if(Platform.OS == 'ios'){
