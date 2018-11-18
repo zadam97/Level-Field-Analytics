@@ -39,6 +39,7 @@ export default class InputField extends Component {
           onSubmitEditing={this.props.focus(this.props.placeholder)}
           placeholderTextColor={Color.LightGrey}
           onChangeText={(text) => this.setState({ text })}
+          
         />
         {this.props.error && <Image style={styles.iconError} source={astrixRed}/>}
       </View>
@@ -65,7 +66,8 @@ const styles = StyleSheet.create({
     width: '85%',
     borderBottomColor: Color.White,
     borderBottomWidth: 1,
-    paddingBottom: (Platform.OS === 'ios' ? h(1) : -h(3))
+    paddingBottom: (Platform.OS === 'ios' ? h(1) : -h(3)),
+    opacity: 50
 
   },
   containerError: {

@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import {SafeAreaView, Text, Image, StyleSheet, AsyncStorage, View, Dimensions} from 'react-native';
+import {SafeAreaView, Text, Image, StyleSheet, StatusBar, View, Dimensions} from 'react-native';
 import Color from '../../components/color';
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearTextGradient } from 'react-native-text-gradient';
 import Sketch from '../../assets/images/footballSketch.jpg';
+import Dive from '../../assets/images/Dive.png';
+import Jags from '../../assets/images/Football9.jpg';
+
 import {Button} from 'react-native-elements';
+import Onboarding from 'react-native-onboarding-swiper';
+
 //import Dimensions from 'Dimensions';
 
 const deviceWidth = Dimensions.get ('window').width;
@@ -16,39 +21,46 @@ export default class OnBoarding extends Component {
     super(props);
     this.state = { scrollEnabled: true };
   }
+  
+  
+  // Don't Need this
   static navigationOptions = {
     title: 'Onboarding',
     headerStyle: {
         backgroundColor: 'white',
       },
   };
+///
 
   render() {
 
     return (
-            <SafeAreaView style={styles.container}>
-              <LinearTextGradient
-              style={styles.logoText}
-              locations={[0, 1]}
-              colors={['red', 'blue']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              Level Field
-              </LinearTextGradient>  
-              <Image source={Sketch} style={{ width: '100%', height: 250, marginBottom: 40}}/>
-              <Text style={{marginBottom: 150, fontSize: 20,textAlign: 'center', fontWeight: 'bold'}}>
-                Creating a Level Playing Field for All Amateur Athletes
-              </Text>
-              <Button title="Continue" buttonStyle={{
-              backgroundColor: Color.DarkTeal,
-              width: 300,
-              height: 45,
-              borderColor: "transparent",
-              borderWidth: 0,
-              borderRadius: 5}}
-              onPress={() => {this.props.navigation.navigate('LogIn')}} />
-            </SafeAreaView>
+    
+      <Onboarding
+      onDone={() => this.props.navigation.navigate('LogIn')}
+      showSkip={false}
+      pages={[
+        {
+          backgroundColor: Color.Green,
+          image: <Image source={Sketch} style={{width:300, height:200}}/>,
+          title: 'Hey',
+          subtitle: 'Welcome to Level Field',
+        },
+        {
+          backgroundColor: Color.LightRed,
+          image: <Image source={Dive} style={{marginRight: 80, width:375, height:250}}/>,
+          title: 'Track Your Stats',
+          subtitle: 'You can see your acceleration, top speed and more',
+        },
+        {
+          backgroundColor: Color.Blue,
+          image: <Image source={Jags} style={{width:300, height:200}} />,
+          title: 'See Your Progress',
+          subtitle: 'Keep track of your improvments over time',
+        },
+        
+      ]}
+     />
             );
         }
 }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text,ScrollView, View} from 'react-native';
+import {StyleSheet, StatusBar, View} from 'react-native';
 import {Tabs,Nav} from './config/navigation';
 import Header from './components/Header';
 import Color from './components/color';

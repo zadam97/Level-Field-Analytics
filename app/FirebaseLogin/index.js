@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { KeyboardAvoidingView, View, StyleSheet, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground, StatusBar} from 'react-native';
 import Login from './screens/Login';
 import Register from './screens/Register';
 import ForgotPassword from './screens/ForgotPassword';
-import { w } from './api/Dimensions';
-import { Alert } from 'react-native';
+import Color from '../components/color';
 import { connect } from 'react-redux';
 
 class FirebaseLogin extends Component {
 
   state = {
     currentScreen: 'login', // can be: 'login' or 'register' or 'forgot'
+    showImage: true,
     };
 
   changeScreen = screenName => () => {
@@ -42,19 +42,33 @@ class FirebaseLogin extends Component {
         break;
     }
 
-    return (
-      <View>
-      
-        <ImageBackground
-          source={this.props.background}
-          style={styles.background}
-          resizeMode="stretch"
-          blurRadius={this.props.blur}
-        >
-          {screenToShow}
-        </ImageBackground>
-      </View>
-    )
+    if(this.state.showImage){
+      return (
+        <View>
+          <ImageBackground
+            source={this.props.background}
+            style={styles.background}
+            resizeMode="stretch"
+            blurRadius={this.props.blur}
+          >
+            {screenToShow}
+          </ImageBackground>
+        </View>
+      )
+    } else {
+
+      return (
+        <View>
+          <ImageBackground
+            style={styles.background}
+            resizeMode="stretch"
+            backgroundColor={Color.DarkTeal}
+          >
+            {screenToShow}
+          </ImageBackground>
+        </View>
+      )
+    }
   }
 }
 

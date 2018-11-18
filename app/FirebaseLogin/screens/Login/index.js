@@ -8,6 +8,7 @@ import LogMeIn from './LogMeIn';
 import Firebase from '../../api/Firebase';
 import Color from '../../../components/color';
 import DismissKeyboard from 'dismissKeyboard';
+import BlurView from 'react-native-blur';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { connect } from 'react-redux';
 import store from '../../../redux/store';
@@ -99,6 +100,7 @@ export default class Login extends Component {
         style={styles.keyboardContainer}
         
       >
+
         <InputField
           placeholder="Email"
           keyboardType="email-address"
@@ -123,6 +125,7 @@ export default class Login extends Component {
           click={this.LogMeIn}
           isLogin={this.state.isLogin}
         />
+
         </KeyboardAvoidingView>
         <View style={styles.textContainer}>
           <TouchableOpacity onPress={this.props.change('register')} style={styles.touchable} activeOpacity={0.6}>
@@ -139,7 +142,6 @@ export default class Login extends Component {
       return (
         //Android
         <TouchableWithoutFeedback onPress={() =>{DismissKeyboard()}}>
-   
         <View style={styles.container}>          
             <LinearTextGradient
               style={styles.logoTextAndroid}
@@ -149,6 +151,8 @@ export default class Login extends Component {
               end={{ x: 1, y: 0 }}
             >Level Field</LinearTextGradient>
           
+
+
           <InputField
             placeholder="Email"
             keyboardType="email-address"
@@ -173,6 +177,8 @@ export default class Login extends Component {
             click={this.LogMeIn}
             isLogin={this.state.isLogin}
           />
+
+
           <View style={styles.textContainerAndroid}>
             <TouchableOpacity onPress={this.props.change('register')} style={styles.touchable} activeOpacity={0.6}>
               <Text style={styles.createAccount}>Create Account</Text>
