@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  Platform,
 } from 'react-native';
 
 import Color from './color';
@@ -18,7 +19,7 @@ export default function Header(props) {
   return (
     <View style={styles.container}>
          <StatusBar
-              backgroundColor='#2E2E2E'
+              backgroundColor={Color.BlackX}
               //^for android match with header background
               barStyle="light-content"
          />
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.BlackX,
     //borderBottomWidth: 1,
     //borderBottomColor: Color.Black,
-    paddingTop: 44,
+    paddingTop: Platform.OS=='ios' ? 44 : 15,
     paddingBottom: 20,
   },
   title: {

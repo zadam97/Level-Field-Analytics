@@ -4,7 +4,7 @@ export default {
 
   //Black/White
   Black: '#000000',
-  BlackX: '#2E2E2E',
+  BlackX: '#050402',
   DarkGrey: '#333333',
   LightGrey: "#CDCDCD",
   White: '#FFFFFF',
@@ -20,6 +20,9 @@ export default {
   Orange: '#FFA500',
   Green: '#BADA55',
 
-
+  //Teals
+  Teal1: '#128898',
+  Teal2:'#046D7C',
+  Teal3:'#53ACB9',
 
 };

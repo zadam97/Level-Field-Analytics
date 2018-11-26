@@ -20,10 +20,11 @@ import AuthLoadingScreen from '../screens/Auth/AuthLoadingScreen';
 let screen = Dimensions.get('window');
 
 const tabBarOptions={
-  activeTintColor: Color.BlackX,
-  inactiveTintColor: Color.DarkTeal,
+  activeTintColor: Color.DarkTeal,
+  inactiveTintColor: Color.Grey,
   activeBackgroundColor: Color.White,
   inactiveBackgroundColor: Color.White,
+  
   };
 
 
@@ -63,7 +64,7 @@ export const createRootNavigator = () => {
         navigationOptions: {
           gesturesEnabled: false,
         },
-      },   
+      },  
     },
   )
 };

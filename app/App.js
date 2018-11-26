@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, StatusBar, View} from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 import {Tabs,Nav} from './config/navigation';
 import Header from './components/Header';
 import Color from './components/color';
@@ -15,7 +16,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.navtab}>
+      <View style={{flex: 1, backgroundColor: Color.BlackX}} forceInset={{'top': 'never'}}>
           <Nav/>
       </View>  
       </Provider>      
@@ -26,8 +27,7 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   
   navtab: {
-    flex: 1,
-    //marginBottom: 5,
+    //flex: 1,
     //height: 400,
   },
 });

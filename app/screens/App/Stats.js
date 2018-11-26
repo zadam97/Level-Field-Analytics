@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { Alert, StyleSheet, View, ScrollView, StatusBar, Platform} from 'react-native';
 import Color from '../../components/color';
 import Header from '../../components/Header';
+import ChartTitle from '../../components/ChartTitle';
+import LinearGradientx from 'react-native-linear-gradient';
 import { VictoryZoomContainer, VictoryBrushContainer, VictoryBar, VictoryLine, VictoryChart, VictoryTheme, VictoryAxis, VictoryStack } from "victory-native";
 import { LineChart, XAxis, YAxis, StackedAreaChart, AreaChart, Grid} from 'react-native-svg-charts';
-import { Circle, G, Line, Rect, Text } from 'react-native-svg';
-import PureChart from 'react-native-pure-chart';
-
-
-
+import { Circle, G, Line, Rect, Text,Path, Defs, LinearGradient, Stop } from 'react-native-svg';
 import * as shape from 'd3-shape';
 
 export default class Stats extends Component {
@@ -31,160 +29,185 @@ export default class Stats extends Component {
 
     render() {
 
-        const data2 = [ 50, 10, 40, 75, -4, -24, 67, 81, 35, 53, -53, 24, 50, -20, -80, 0, 0, 80, -30, 4, 5, 6, 10 ]
-        const data3 = [ 80, 10, 70, 75, -7, -24, 76, 43, 35, 23, -23, 24, 50, -20, -80, 0, 7, 9, -10, 4, 70, 6, 10 ]
+        
+            const topSpeed = [ 16, 17, 17, 16, 18, 17, 17, 18, 17, 19, 18, 18, 17, 18]
+            const Endurance = [ 52, 62, 69, 68, 71, 70, 73, 72, 75, 72, 75, 74, 76, 76]
+            const Play = [ 14, 14, 15, 17, 14, 16, 13, 10, 16, 17, 16, 14, 14, 12, 9, 15, 15, 13, 15, 12, 11, 14, 12, 8, 11, 13, 14, 11, 13, 10]
 
-        const contentInset = { top: 20, bottom: 20 }
 
+        const verticalContentInset = { top: 10, bottom: 10 }
+        const xAxisHeight = 30
 
-        const colors = [ '#8800cc', '#aa00ff', '#cc66ff', '#eeccff' ]
-        const keys   = [ 'apples', 'bananas', 'cherries', 'dates' ]
-        const svgs = [
-                    { onPress: () => console.log('apples') },
-                    { onPress: () => console.log('bananas') },
-                    { onPress: () => console.log('cherries') },
-                    { onPress: () => console.log('dates') },
-                ]
-
-        let sampleData = [
-            {
-                seriesName: 'series1',
-                data: [
-                {x: '2018-02-01', y: 30},
-                {x: '2018-02-02', y: 200},
-                {x: '2018-02-03', y: 170},
-                {x: '2018-02-04', y: 250},
-                {x: '2018-02-05', y: 10}
-                ],
-                color: '#297AB1'
-            },
-            {
-                seriesName: 'series2',
-                data: [
-                {x: '2018-02-01', y: 20},
-                {x: '2018-02-02', y: 100},
-                {x: '2018-02-03', y: 140},
-                {x: '2018-02-04', y: 550},
-                {x: '2018-02-05', y: 40}
-                ],
-                color: 'yellow'
-            }
-            ]
-           
+        const Gradient1 = () => (
+            <Defs key={'gradient'}>
+                <LinearGradient id={'gradient'} x1={'0'} y={'0%'} x2={'100%'} y2={'0%'}>
+                    <Stop offset={'0%'} stopColor={Color.DarkTeal}/>
+                    <Stop offset={'100%'} stopColor={Color.Green}/>
+                </LinearGradient>
+            </Defs>
+        )
+        const Gradient2 = () => (
+            <Defs key={'gradient'}>
+                <LinearGradient id={'gradient'} x1={'0'} y={'0%'} x2={'100%'} y2={'0%'}>
+                    <Stop offset={'0%'} stopColor={Color.DarkRed}/>
+                    <Stop offset={'100%'} stopColor={Color.Blue}/>
+                </LinearGradient>
+            </Defs>
+        )
+        const Shadow = ({ line }) => (
+            <Path
+                key={'shadow'}
+                y={2}
+                d={line}
+                fill={'none'}
+                strokeWidth={4}
+                stroke={'rgba(100, 100, 100, 0.2)'}
+            />
+        )
 
         return (
             <View>
                 <Header/>
-                <ScrollView contentInset= {{top: 20, left: 0, bottom: 120, right: 0}}>
-                    <View>
-                        <View style={{flexDirection: 'row'}}>
-                            <YAxis style={{ height: 300, marginLeft: 10, marginRight: 5}}
-                                    data={ data2 }
-                                    contentInset={ contentInset }
-                                    svg={{
-                                        fill: 'black',
-                                        fontSize: 10,
-                                    }}
-                                    numberOfTicks={ 10 }
-                                    formatLabel={ value => `${value}ºC` }
-                            />
-                            <ScrollView horizontal={true} style={ { height: 350, paddingVertical: 16 } } bounces={true}>
-                                <View style={{width: 600, height: 300}}>
-                                <LineChart
-                                    style={{ flex: 1, marginLeft: 22, marginBottom: 22,}}
-                                    data={ data2 }
-                                    svg={{ stroke: Color.DarkRed, strokeWidth: 2 }}
-                                    contentInset={{ contentInset }}
-                                    curve={shape.curveLinear}
-                                >
-                                <Grid/>
-                                </LineChart>
-                                <XAxis
-                                style={{ width: 615, marginHorizontal: -10 }}
-                                data={ data2 }
-                                formatLabel={ (value, index) => index }
-                                contentInset={{ left: 35, right: 0 }}
-                                svg={{ fontSize: 10, fill: 'black' }}
-                                />
-                                </View>
-                            </ScrollView>
-                        </View>
-                    </View>
 
-                    <VictoryChart width={400} height={350} scale={{x: "time"}}
-                    containerComponent={
-                    <VictoryZoomContainer responsive={false}
-                        zoomDimension="x"
-                        zoomDomain={this.state.zoomDomain}
-                        onZoomDomainChange={this.handleZoom.bind(this)}
+                <LinearGradientx colors={['#C31432', '#240B36']} >
+                
+                <ScrollView contentInset= {{top: 20, left: 0, bottom: 120, right: 0}} style={{bounce: false,paddingBottom: 0}}>
+                
+                <View style={{paddingTop: 15, paddingBottom: 15, paddingLeft: 0, paddingRight: 15, margin: 20, borderRadius: 10, backgroundColor: 'white' }}>
+                    <ChartTitle
+                        title='Game vs. Top Speed'
+                        fontsize={20}
                     />
-                    }
-                    >
-                    <VictoryLine
-                    style={{
-                        data: {stroke: "tomato"}
-                    }}
-                    data={[
-                        {x: new Date(1982, 1, 1), y: 125},
-                        {x: new Date(1987, 1, 1), y: 257},
-                        {x: new Date(1993, 1, 1), y: 345},
-                        {x: new Date(1997, 1, 1), y: 515},
-                        {x: new Date(2001, 1, 1), y: 132},
-                        {x: new Date(2005, 1, 1), y: 305},
-                        {x: new Date(2011, 1, 1), y: 270},
-                        {x: new Date(2015, 1, 1), y: 470}
-                    ]}
-                    />
-                    </VictoryChart>
-
-                    <VictoryChart
-                    padding={{top: 0, left: 50, right: 50, bottom: 30}}
-                    width={400} height={120} scale={{x: "time"}}
-                    containerComponent={
-                        <VictoryBrushContainer responsive={false}
-                        brushDimension="x"
-                        brushDomain={this.state.selectedDomain}
-                        onBrushDomainChange={this.handleBrush.bind(this)}
+                    <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
+                        <YAxis
+                            data={topSpeed}
+                            style={{ marginBottom: xAxisHeight }}
+                            contentInset={verticalContentInset}
+                            svg={{
+                                fill: Color.BlackX,
+                                fontSize: 10
+                            }}
+                            numberOfTicks={5}
                         />
-                    }
-                    >
-                    <VictoryAxis
-                        tickValues={[
-                        new Date(1985, 1, 1),
-                        new Date(1990, 1, 1),
-                        new Date(1995, 1, 1),
-                        new Date(2000, 1, 1),
-                        new Date(2005, 1, 1),
-                        new Date(2010, 1, 1)
-                        ]}
-                        tickFormat={(x) => new Date(x).getFullYear()}
-                    />
-                    <VictoryLine
-                        style={{
-                        data: {stroke: "tomato"}
+                    <View style={{ flex: 1, marginLeft: 10, }}>
+                        <LineChart
+                        style={ { flex: 1 } }
+                        data={ topSpeed }
+                        contentInset={verticalContentInset}
+                        svg={{
+                            strokeWidth: 2,
+                            stroke: 'url(#gradient)',
                         }}
-                        data={[
-                        {x: new Date(1982, 1, 1), y: 125},
-                        {x: new Date(1987, 1, 1), y: 257},
-                        {x: new Date(1993, 1, 1), y: 345},
-                        {x: new Date(1997, 1, 1), y: 515},
-                        {x: new Date(2001, 1, 1), y: 132},
-                        {x: new Date(2005, 1, 1), y: 305},
-                        {x: new Date(2011, 1, 1), y: 270},
-                        {x: new Date(2015, 1, 1), y: 470}
-                        ]}
-                    />
-                    </VictoryChart>
-                    <PureChart data={sampleData} type='line'
-                    height={300}
-                    width = {'95%'}
-                    
-                    />
-                    
-                    <Text style={styles.title}>
-                    Cool Charts
-                    </Text>
+                        >
+                        <Grid/>
+                        <Gradient1/>
+                        <Shadow/>
+                        </LineChart>
+                        <XAxis
+                            style={{ marginHorizontal: -10, height: xAxisHeight }}
+                            data={topSpeed}
+                            formatLabel={(value, index) => index + 1}
+                            contentInset={{ left: 10, right: 10 }}
+                            svg={{
+                                fill: Color.BlackX,
+                                fontSize: 10
+                            }}                        
+                        />
+                    </View>
+                    </View>
+                </View>
+                
+                <View style={{paddingTop: 15, paddingBottom: 15, paddingLeft: 0, paddingRight: 15, margin: 20, borderRadius: 10, backgroundColor: 'white'}}>
+                <ChartTitle
+                    title='Game vs. Endurance%'
+                />
+                <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
+                <YAxis
+                    data={Endurance}
+                    style={{ marginBottom: xAxisHeight }}
+                    contentInset={verticalContentInset}
+                    svg={{
+                        fill: Color.BlackX,
+                        fontSize: 10
+                    }}
+                    numberOfTicks={5}
+                />
+                <View style={{ flex: 1, marginLeft: 10, }}>
+                <LineChart
+                style={ { flex: 1 } }
+                data={ Endurance }
+                contentInset={verticalContentInset}
+                svg={{
+                    strokeWidth: 2,
+                    stroke: 'url(#gradient)',
+                }}
+                 >
+                <Grid/>
+                <Gradient2/>
+                </LineChart>
+                <XAxis
+                    style={{ marginHorizontal: -10, height: xAxisHeight }}
+                    data={Endurance}
+                    formatLabel={(value, index) => index + 1}
+                    contentInset={{ left: 10, right: 10 }}
+                    svg={{
+                        fill: Color.BlackX,
+                        fontSize: 10
+                    }}                        
+                />
+                </View>
+                </View>
+                </View>
+                 
+                <View style={{paddingTop: 15, paddingBottom: 15, paddingLeft: 0, paddingRight: 15, margin: 20, borderRadius: 10, backgroundColor: 'white'}}>
+                <ChartTitle
+                    title='Play vs. Top Speed'
+                />
+                <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
+                <YAxis
+                    data={Play}
+                    style={{ marginBottom: xAxisHeight }}
+                    contentInset={verticalContentInset}
+                    svg={{
+                        fill: Color.BlackX,
+                        fontSize: 10
+                    }}
+                    numberOfTicks={5}
+                />
+                <ScrollView horizontal={true} style={{flex: 1, marginLeft: 10, }}>
+                <View style={{width: 600}}>
+                <LineChart
+                style={ { flex: 1 } }
+                data={ Play }
+                contentInset={verticalContentInset}
+                svg={{
+                    strokeWidth: 2,
+                    stroke: 'url(#gradient)',
+                }}
+                 >
+                <Grid/>
+                <Gradient2/>
+                </LineChart>
+                <XAxis
+                    style={{ marginHorizontal: -10, height: xAxisHeight }}
+                    data={Play}
+                    formatLabel={(value, index) => index + 1}
+                    contentInset={{ left: 10, right: 10 }}
+                    svg={{
+                        fill: Color.BlackX,
+                        fontSize: 10
+                    }}                        
+                />
+                </View>
+                
                 </ScrollView>
+                </View>
+                </View>
+                
+                </ScrollView>
+
+                </LinearGradientx>
+
             </View>
 
         )
@@ -198,9 +221,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  containerx: {
+    flex: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Color.BlackX,
+    //borderBottomWidth: 1,
+    //borderBottomColor: Color.Black,
+    paddingTop: Platform.OS=='ios' ? 44 : 15,
+    paddingBottom: 20,
+  },
   title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
+    fontSize: 24,
+    fontFamily: 'Avenir-heavy',
+    color: Color.LightTeal,
+  },
 });

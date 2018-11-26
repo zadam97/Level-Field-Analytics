@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {Alert, StyleSheet, Text, TouchableOpacity, ScrollView, View, Dimensions, Image} from 'react-native';
+import {Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity, ScrollView, View, Dimensions, Image} from 'react-native';
 import {Button} from 'react-native-elements';
-import { VictoryZoomContainer, VictoryBrushContainer, VictoryBar, VictoryLine, VictoryChart, VictoryTheme, VictoryAxis, VictoryStack } from "victory-native";
 import Header from '../../components/Header';
 import Color from '../../components/color';
-import User from '../../assets/images/user.jpg'
+import User from '../../assets/images/user.png'
 import firebase from "firebase";
+import LinearGradient from 'react-native-linear-gradient';
 var config = {
     apiKey: "AIzaSyB2inbzuH_x5xevuC8ZxYWw4vfrmqfgE6M",
     authDomain: "level-field.firebaseapp.com",
@@ -33,20 +33,71 @@ export default class Settings extends Component {
       
   render() {
     return (
-        <View style={{flex: 1}}>
-          <Header/>
-          <View style={styles.container}>
-            <View style={{marginLeft: 10, flexDirection: 'row'}}>
-              <Image source={User} style={{width: 60, height: 60, margin: 20}}/>
-              <View style={{marginLeft: 10}}>
-                <Text style={styles.name}>{this.state.displayName}</Text>
-                <Text style={styles.email}>{this.state.email}</Text>
-              </View>
-            </View>
-            <Button buttonStyle={styles.button} title='Log Out' onPress={this._logout} />
-            <View style={{height: 600, marginTop: 20, marginVertical: 10, backgroundColor: Color.LightGrey}}/>
-           </View>
-      </View>        
+      
+           <View style={styles.container}>
+           <LinearGradient
+            colors={['#C31432', '#240B36']}
+           >
+           <View style={{height: 50}}/>
+
+           <Text style={styles.profile}>
+             Profile
+           </Text>
+
+           <Image source={User} style={{height: 50, width: 50, alignSelf: 'center', marginBottom: 10}} />
+            
+
+           <Text style={styles.name}>
+             {this.state.displayName}
+           </Text>
+
+           <Text style={styles.email}>
+             {this.state.email}
+           </Text>
+
+           <Button buttonStyle={styles.button} backgroundColor='transparent' outline = {true} fontSize={16} title='Log Out' onPress={this._logout} />
+
+            </LinearGradient>
+
+                <View style={{backgroundColor: Color.BlackX, flex: 1}}>
+                <Text style={styles.bests}>
+                Personal Bests
+                </Text>
+                <View style={{backgroundColor: Color.BlackX, flex: 1, justifyContent: 'space-around', flexDirection:'row', alignItems: 'center'}}>
+
+                
+                <LinearGradient style={{width: 150, height: 150, borderRadius: 15, alignItems: 'center'}}colors={['#C31432', '#240B36']}>
+
+                <View style={{borderRadius: 15, width: 100, height: 100}}>
+                <Text style={styles.cardText}>
+                Max Accel
+                </Text>
+                <Text style={styles.stat}>
+                20
+                </Text>
+                </View>
+
+                </LinearGradient>
+
+                <LinearGradient style={{width: 150, height: 150, borderRadius: 15, alignItems: 'center'}}colors={['#C31432', '#240B36']}>
+
+                <View style={{borderRadius: 15, width: 100, height: 100}}>
+                <Text style={styles.cardText}>
+                Top Speed
+                </Text>
+                <Text style={styles.stat}>
+                19
+                </Text>
+                </View>
+
+                </LinearGradient>
+                </View>
+                </View>
+
+
+
+      </View>
+
     );
   }
   _logout(){
@@ -65,18 +116,57 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
+    //justifyContent: 'flex-start',
   },
   name: {
-    fontSize: 20,
-    textAlign: 'left',
+    fontSize: 24,
     marginTop: 20,
+    fontFamily: 'Avenir-heavy',
+    textAlign: 'center',
+    color: 'white'
+  },
+  profile: {
+    marginBottom: 50,
+    fontSize: 20,
+    fontFamily: 'Avenir-medium',
+    textAlign: 'center',
+    marginTop: 20,
+
+    color: Color.White
+  },
+  bests: {
+    marginBottom: 10,
+    fontSize: 20,
+    fontFamily: 'Avenir-heavy',
+    textAlign: 'center',
+    marginTop: 15,
+
+    color: Color.White
+  },
+  cardText: {
+    fontSize: 20,
+    fontFamily: 'Avenir-medium',
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginTop: 20,
+
+    color: Color.White
+  },
+  stat: {
+    fontSize: 26,
+    fontFamily: 'Avenir-medium',
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginTop: 20,
+
+    color: Color.White
   },
   email: {
-    fontSize: 15,
-    textAlign: 'left',
-    marginTop: 10,
-    color: 'grey'
+    fontSize: 14,
+    marginTop: 5,
+    fontFamily: 'Avenir-book',
+    textAlign: 'center',
+    color: 'white'
   },
   stretch: {
     left: 50,
@@ -85,12 +175,14 @@ const styles = StyleSheet.create({
     height: 940,
   },
   button: {
-    backgroundColor: Color.Blue,
-    width: 250,
+    backgroundColor: 'transparent',
+    borderColor: Color.White,
+    width: 175,
     height: 45,
-    borderRadius: 8,
-    margin: 20,
-    alignSelf: 'center'
+    borderRadius: 50,
+    marginTop: 25,
+    marginBottom: 75,
+    alignSelf: 'center',
   },
   text: {
     color: 'blue',
