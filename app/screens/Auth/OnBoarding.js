@@ -3,9 +3,9 @@ import {SafeAreaView, Text, Image, StyleSheet, StatusBar, View, Dimensions} from
 import Color from '../../components/color';
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearTextGradient } from 'react-native-text-gradient';
-import Sketch from '../../assets/images/footballSketch.jpg';
+import C1 from '../../assets/images/Catch1.png';
 import Dive from '../../assets/images/Dive.png';
-import Jags from '../../assets/images/Football9.jpg';
+import C2 from '../../assets/images/Catch2.png';
 
 import {Button} from 'react-native-elements';
 import Onboarding from 'react-native-onboarding-swiper';
@@ -42,7 +42,7 @@ export default class OnBoarding extends Component {
       pages={[
         {
           backgroundColor: Color.Green,
-          image: <Image source={Sketch} style={{width:300, height:200}}/>,
+          image: <Image source={C1} style={{width:300, height:250}}/>,
           title: 'Hey',
           subtitle: 'Welcome to Level Field',
         },
@@ -54,7 +54,7 @@ export default class OnBoarding extends Component {
         },
         {
           backgroundColor: Color.Blue,
-          image: <Image source={Jags} style={{width:300, height:200}} />,
+          image: <Image source={C2} style={{width:300, height:400}} />,
           title: 'See Your Progress',
           subtitle: 'Keep track of your improvments over time',
         },

@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import {StatusBar, StyleSheet, SafeAreaView, AsyncStorage, View, Button, Dimensions} from 'react-native';
 import Color from '../../components/color';
 import FirebaseLogin from "../../FirebaseLogin";
-import wallpaper from "../../assets/images/Football2.jpg";
+import wallpaper1 from "../../assets/images/Football2.jpg";
+import wallpaper2 from "../../assets/images/RW.jpg";
+import wallpaper3 from "../../assets/images/AB.jpg";
+
 const deviceWidth = Dimensions.get ('window').width;
 const deviceHeight = Dimensions.get ('window').height;
       
@@ -18,12 +21,12 @@ export default class LogIn extends Component {
     return (
           <View>
             <StatusBar
-            backgroundColor={Color.BlackX} 
+            backgroundColor={Color.Black} 
             barStyle="light-content"
             />
             <FirebaseLogin  
             //login={//Something Here} 
-            background={wallpaper}
+            background={wallpaper3}
             mainApp={() => {this.props.navigation.navigate('App')}}            
             />
           </View>          

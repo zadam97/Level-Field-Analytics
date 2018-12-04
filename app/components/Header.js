@@ -43,10 +43,11 @@ const styles = StyleSheet.create({
     //borderBottomColor: Color.Black,
     paddingTop: Platform.OS=='ios' ? 44 : 15,
     paddingBottom: 20,
+    opacity: 100,
   },
   title: {
     fontSize: 24,
     fontFamily: 'Avenir-heavy',
-    color: Color.LightTeal,
+    color: Color.RedTheme,
   },
 });

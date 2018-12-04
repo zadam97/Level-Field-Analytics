@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements';
 import Color from '../components/color';
 
 
-import Home from '../screens/App/Home';
+import Dashboard from '../screens/App/Dashboard';
 import Stats from '../screens/App/Stats';
 import Settings from '../screens/App/Settings';
 
@@ -20,7 +20,7 @@ import AuthLoadingScreen from '../screens/Auth/AuthLoadingScreen';
 let screen = Dimensions.get('window');
 
 const tabBarOptions={
-  activeTintColor: Color.DarkTeal,
+  activeTintColor: Color.RedTheme,
   inactiveTintColor: Color.Grey,
   activeBackgroundColor: Color.White,
   inactiveBackgroundColor: Color.White,
@@ -31,9 +31,9 @@ const tabBarOptions={
 export const Tabs = createBottomTabNavigator({
   
   'Home': {
-    screen: Home,
+    screen: Dashboard,
     navigationOptions: {
-      tabBarLabel: 'Home',
+      tabBarLabel: 'Dashboard',
       tabBarOptions,
       tabBarIcon: ({ tintColor }) => <Icon name="dashboard" type="material-icons" size={24} color={tintColor} />
     },

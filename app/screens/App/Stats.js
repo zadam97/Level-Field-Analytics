@@ -41,16 +41,16 @@ export default class Stats extends Component {
         const Gradient1 = () => (
             <Defs key={'gradient'}>
                 <LinearGradient id={'gradient'} x1={'0'} y={'0%'} x2={'100%'} y2={'0%'}>
-                    <Stop offset={'0%'} stopColor={Color.DarkTeal}/>
-                    <Stop offset={'100%'} stopColor={Color.Green}/>
+                    <Stop offset={'0%'} stopColor={Color.BlackX}/>
+                    <Stop offset={'100%'} stopColor={Color.BlackX}/>
                 </LinearGradient>
             </Defs>
         )
         const Gradient2 = () => (
             <Defs key={'gradient'}>
                 <LinearGradient id={'gradient'} x1={'0'} y={'0%'} x2={'100%'} y2={'0%'}>
-                    <Stop offset={'0%'} stopColor={Color.DarkRed}/>
-                    <Stop offset={'100%'} stopColor={Color.Blue}/>
+                    <Stop offset={'0%'} stopColor={Color.BlackX}/>
+                    <Stop offset={'100%'} stopColor={Color.BlackX}/>
                 </LinearGradient>
             </Defs>
         )
@@ -69,142 +69,191 @@ export default class Stats extends Component {
             <View>
                 <Header/>
 
-                <LinearGradientx colors={['#C31432', '#240B36']} >
+                <LinearGradientx colors={[Color.BlackX, Color.BlackXX]} >
                 
-                <ScrollView contentInset= {{top: 20, left: 0, bottom: 120, right: 0}} style={{bounce: false,paddingBottom: 0}}>
-                
-                <View style={{paddingTop: 15, paddingBottom: 15, paddingLeft: 0, paddingRight: 15, margin: 20, borderRadius: 10, backgroundColor: 'white' }}>
-                    <ChartTitle
-                        title='Game vs. Top Speed'
-                        fontsize={20}
-                    />
-                    <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
-                        <YAxis
-                            data={topSpeed}
-                            style={{ marginBottom: xAxisHeight }}
+                        <ScrollView showsVerticalScrollIndicator={false} contentInset= {{top: 20, left: 0, bottom: 120, right: 0}} style={{bounce: false,paddingBottom: 0}}>
+                        
+                        <LinearGradientx start={{x: 0, y: 0}} end={{x: 1, y: 0}} style={styles.Card} colors={[Color.RedCard, Color.RedCard]} >
+
+                            <ChartTitle
+                                title='Game vs. Top Speed'
+                                fontsize={20}
+                            />
+                            <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
+                                <YAxis
+                                    data={topSpeed}
+                                    style={{ marginBottom: xAxisHeight }}
+                                    contentInset={verticalContentInset}
+                                    svg={{
+                                        fill: Color.BlackX,
+                                        fontSize: 10
+                                    }}
+                                    numberOfTicks={5}
+                                />
+                            <View style={{ flex: 1, marginLeft: 10, }}>
+                                <LineChart
+                                style={ { flex: 1 } }
+                                data={ topSpeed }
+                                contentInset={verticalContentInset}
+                                svg={{
+                                    strokeWidth: 2,
+                                    stroke: 'url(#gradient)',
+                                }}
+                                >
+                                <Grid/>
+                                <Gradient1/>
+                                <Shadow/>
+                                </LineChart>
+                                <XAxis
+                                    style={{ marginHorizontal: -10, height: xAxisHeight }}
+                                    data={topSpeed}
+                                    formatLabel={(value, index) => index + 1}
+                                    contentInset={{ left: 10, right: 10 }}
+                                    svg={{
+                                        fill: Color.BlackX,
+                                        fontSize: 10
+                                    }}                        
+                                />
+                            </View>
+                            </View>
+                        </LinearGradientx>
+                        
+                        <LinearGradientx start={{x: 0, y: 0}} end={{x: 1, y: 0}} style={styles.Card} colors={[Color.RedCard, Color.RedCard]} >
+                            <ChartTitle
+                                title='Play vs. Top Speed'
+                            />
+                            <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
+                            <YAxis
+                                data={Play}
+                                style={{ marginBottom: xAxisHeight }}
+                                contentInset={verticalContentInset}
+                                svg={{
+                                    fill: Color.BlackX,
+                                    fontSize: 10
+                                }}
+                                numberOfTicks={5}
+                            />
+                            <ScrollView horizontal={true} style={{flex: 1, marginLeft: 10, }}>
+                            <View style={{width: 600}}>
+                            <LineChart
+                            style={ { flex: 1 } }
+                            data={ Play }
                             contentInset={verticalContentInset}
                             svg={{
-                                fill: Color.BlackX,
-                                fontSize: 10
+                                strokeWidth: 2,
+                                stroke: 'url(#gradient)',
                             }}
-                            numberOfTicks={5}
-                        />
-                    <View style={{ flex: 1, marginLeft: 10, }}>
-                        <LineChart
-                        style={ { flex: 1 } }
-                        data={ topSpeed }
-                        contentInset={verticalContentInset}
-                        svg={{
-                            strokeWidth: 2,
-                            stroke: 'url(#gradient)',
-                        }}
-                        >
-                        <Grid/>
-                        <Gradient1/>
-                        <Shadow/>
-                        </LineChart>
-                        <XAxis
-                            style={{ marginHorizontal: -10, height: xAxisHeight }}
-                            data={topSpeed}
-                            formatLabel={(value, index) => index + 1}
-                            contentInset={{ left: 10, right: 10 }}
-                            svg={{
-                                fill: Color.BlackX,
-                                fontSize: 10
-                            }}                        
-                        />
-                    </View>
-                    </View>
-                </View>
-                
-                <View style={{paddingTop: 15, paddingBottom: 15, paddingLeft: 0, paddingRight: 15, margin: 20, borderRadius: 10, backgroundColor: 'white'}}>
-                <ChartTitle
-                    title='Game vs. Endurance%'
-                />
-                <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
-                <YAxis
-                    data={Endurance}
-                    style={{ marginBottom: xAxisHeight }}
-                    contentInset={verticalContentInset}
-                    svg={{
-                        fill: Color.BlackX,
-                        fontSize: 10
-                    }}
-                    numberOfTicks={5}
-                />
-                <View style={{ flex: 1, marginLeft: 10, }}>
-                <LineChart
-                style={ { flex: 1 } }
-                data={ Endurance }
-                contentInset={verticalContentInset}
-                svg={{
-                    strokeWidth: 2,
-                    stroke: 'url(#gradient)',
-                }}
-                 >
-                <Grid/>
-                <Gradient2/>
-                </LineChart>
-                <XAxis
-                    style={{ marginHorizontal: -10, height: xAxisHeight }}
-                    data={Endurance}
-                    formatLabel={(value, index) => index + 1}
-                    contentInset={{ left: 10, right: 10 }}
-                    svg={{
-                        fill: Color.BlackX,
-                        fontSize: 10
-                    }}                        
-                />
-                </View>
-                </View>
-                </View>
-                 
-                <View style={{paddingTop: 15, paddingBottom: 15, paddingLeft: 0, paddingRight: 15, margin: 20, borderRadius: 10, backgroundColor: 'white'}}>
-                <ChartTitle
-                    title='Play vs. Top Speed'
-                />
-                <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
-                <YAxis
-                    data={Play}
-                    style={{ marginBottom: xAxisHeight }}
-                    contentInset={verticalContentInset}
-                    svg={{
-                        fill: Color.BlackX,
-                        fontSize: 10
-                    }}
-                    numberOfTicks={5}
-                />
-                <ScrollView horizontal={true} style={{flex: 1, marginLeft: 10, }}>
-                <View style={{width: 600}}>
-                <LineChart
-                style={ { flex: 1 } }
-                data={ Play }
-                contentInset={verticalContentInset}
-                svg={{
-                    strokeWidth: 2,
-                    stroke: 'url(#gradient)',
-                }}
-                 >
-                <Grid/>
-                <Gradient2/>
-                </LineChart>
-                <XAxis
-                    style={{ marginHorizontal: -10, height: xAxisHeight }}
-                    data={Play}
-                    formatLabel={(value, index) => index + 1}
-                    contentInset={{ left: 10, right: 10 }}
-                    svg={{
-                        fill: Color.BlackX,
-                        fontSize: 10
-                    }}                        
-                />
-                </View>
-                
-                </ScrollView>
-                </View>
-                </View>
-                
-                </ScrollView>
+                            >
+                            <Grid/>
+                            <Gradient2/>
+                            <Shadow/>
+                            </LineChart>
+                            <XAxis
+                                style={{ marginHorizontal: -10, height: xAxisHeight }}
+                                data={Play}
+                                formatLabel={(value, index) => index + 1}
+                                contentInset={{ left: 10, right: 10 }}
+                                svg={{
+                                    fill: Color.BlackX,
+                                    fontSize: 10
+                                }}                        
+                            />
+                            </View>
+                        
+                            </ScrollView>
+                            </View>
+                        </LinearGradientx>
+                        
+                        <LinearGradientx start={{x: 0, y: 0}} end={{x: 1, y: 0}} style={styles.Card} colors={[Color.RedCard, Color.RedCard]} >
+                                <ChartTitle
+                                    title='Game vs. Endurance%'
+                                />
+                                <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
+                                <YAxis
+                                    data={Endurance}
+                                    style={{ marginBottom: xAxisHeight }}
+                                    contentInset={verticalContentInset}
+                                    svg={{
+                                        fill: Color.BlackX,
+                                        fontSize: 10
+                                    }}
+                                    numberOfTicks={5}
+                                />
+                                <View style={{ flex: 1, marginLeft: 10, }}>
+                                <LineChart
+                                style={ { flex: 1 } }
+                                data={ Endurance }
+                                contentInset={verticalContentInset}
+                                svg={{
+                                    strokeWidth: 2,
+                                    stroke: 'url(#gradient)',
+                                }}
+                                >
+                                <Grid/>
+                                <Gradient2/>
+                                <Shadow/>
+                                </LineChart>
+                                <XAxis
+                                    style={{ marginHorizontal: -10, height: xAxisHeight }}
+                                    data={Endurance}
+                                    formatLabel={(value, index) => index + 1}
+                                    contentInset={{ left: 10, right: 10 }}
+                                    svg={{
+                                        fill: Color.BlackX,
+                                        fontSize: 10
+                                    }}                        
+                                />
+                                </View>
+                                </View>
+                        </LinearGradientx>
+                        
+                        <LinearGradientx start={{x: 0, y: 0}} end={{x: 1, y: 0}} style={styles.Card} colors={[Color.RedCard, Color.RedCard]} >
+                                <ChartTitle
+                                    title='Play vs. Top Speed'
+                                />
+                                <View style={{ height: 200, padding: 10, flexDirection: 'row' }}>
+                                <YAxis
+                                    data={Play}
+                                    style={{ marginBottom: xAxisHeight }}
+                                    contentInset={verticalContentInset}
+                                    svg={{
+                                        fill: Color.BlackX,
+                                        fontSize: 10
+                                    }}
+                                    numberOfTicks={5}
+                                />
+                                <ScrollView horizontal={true} style={{flex: 1, marginLeft: 10, }}>
+                                <View style={{width: 600}}>
+                                <LineChart
+                                style={ { flex: 1 } }
+                                data={ Play }
+                                contentInset={verticalContentInset}
+                                svg={{
+                                    strokeWidth: 2,
+                                    stroke: 'url(#gradient)',
+                                }}
+                                >
+                                <Grid/>
+                                <Gradient2/>
+                                <Shadow/>
+                                </LineChart>
+                                <XAxis
+                                    style={{ marginHorizontal: -10, height: xAxisHeight }}
+                                    data={Play}
+                                    formatLabel={(value, index) => index + 1}
+                                    contentInset={{ left: 10, right: 10 }}
+                                    svg={{
+                                        fill: Color.BlackX,
+                                        fontSize: 10
+                                    }}                        
+                                />
+                                </View>
+                                
+                                </ScrollView>
+                                </View>
+                        </LinearGradientx>           
+
+                        </ScrollView>
 
                 </LinearGradientx>
 
@@ -235,5 +284,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'Avenir-heavy',
     color: Color.LightTeal,
+  },
+  Card: {
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 0, 
+    paddingRight: 15, 
+    margin: 20, 
+    borderRadius: 10,
   },
 });

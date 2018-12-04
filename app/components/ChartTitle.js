@@ -31,7 +31,6 @@ import React, {
     container: {
       flex: 0,
       justifyContent: 'center',
-      backgroundColor: 'white',
       alignItems: 'center',
       marginHorizontal: 20,
       paddingBottom: 10,

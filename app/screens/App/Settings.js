@@ -35,10 +35,10 @@ export default class Settings extends Component {
     return (
       
            <View style={styles.container}>
-           <LinearGradient
-            colors={['#C31432', '#240B36']}
-           >
-           <View style={{height: 50}}/>
+           <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 1}} colors={[Color.RedCard, Color.RedCard]}>
+           
+           <View style={{height: 30}}/>
+
 
            <Text style={styles.profile}>
              Profile
@@ -58,42 +58,44 @@ export default class Settings extends Component {
            <Button buttonStyle={styles.button} backgroundColor='transparent' outline = {true} fontSize={16} title='Log Out' onPress={this._logout} />
 
             </LinearGradient>
+            
+                <LinearGradient style={{flex: 1}} start={{x: .25, y: 0}} end={{x: .75, y: 1}} colors={[Color.BlackX, Color.BlackXX]}>
 
-                <View style={{backgroundColor: Color.BlackX, flex: 1}}>
                 <Text style={styles.bests}>
                 Personal Bests
                 </Text>
-                <View style={{backgroundColor: Color.BlackX, flex: 1, justifyContent: 'space-around', flexDirection:'row', alignItems: 'center'}}>
+                  <View style={{flex: 1, justifyContent: 'space-around', flexDirection:'row', alignItems: 'center'}}>
 
-                
-                <LinearGradient style={{width: 150, height: 150, borderRadius: 15, alignItems: 'center'}}colors={['#C31432', '#240B36']}>
+                  
+                  <LinearGradient style={{width: 150, height: 150, borderRadius: 15, alignItems: 'center'}} colors={[Color.RedCard, Color.RedCard]}>
 
-                <View style={{borderRadius: 15, width: 100, height: 100}}>
-                <Text style={styles.cardText}>
-                Max Accel
-                </Text>
-                <Text style={styles.stat}>
-                20
-                </Text>
-                </View>
+                      <View style={{borderRadius: 15, width: 100, height: 100}}>
+                      <Text style={styles.cardText}>
+                      Max Accel
+                      </Text>
+                      <Text style={styles.stat}>
+                      20
+                      </Text>
+                      </View>
 
-                </LinearGradient>
+                  </LinearGradient>
 
-                <LinearGradient style={{width: 150, height: 150, borderRadius: 15, alignItems: 'center'}}colors={['#C31432', '#240B36']}>
+                  <LinearGradient style={{width: 150, height: 150, borderRadius: 15, alignItems: 'center'}} colors={[Color.RedCard, Color.RedCard]}>
 
-                <View style={{borderRadius: 15, width: 100, height: 100}}>
-                <Text style={styles.cardText}>
-                Top Speed
-                </Text>
-                <Text style={styles.stat}>
-                19
-                </Text>
-                </View>
+                      <View style={{borderRadius: 15, width: 100, height: 100}}>
+                      <Text style={styles.cardText}>
+                      Top Speed
+                      </Text>
+                      <Text style={styles.stat}>
+                      19
+                      </Text>
+                      </View>
 
-                </LinearGradient>
-                </View>
-                </View>
-
+                  </LinearGradient>
+                  
+                  </View>
+              
+                </LinearGradient>>
 
 
       </View>
@@ -126,8 +128,8 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   profile: {
-    marginBottom: 50,
-    fontSize: 20,
+    marginBottom: 40,
+    fontSize: 24,
     fontFamily: 'Avenir-medium',
     textAlign: 'center',
     marginTop: 20,
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
   },
   bests: {
     marginBottom: 10,
-    fontSize: 20,
+    fontSize: 30,
     fontFamily: 'Avenir-heavy',
     textAlign: 'center',
     marginTop: 15,
