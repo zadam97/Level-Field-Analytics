@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity, ScrollView, View, Dimensions, Image} from 'react-native';
+import {Alert, StatusBar, SafeAreaView, StyleSheet, Text, TouchableOpacity, ScrollView, View, Dimensions, Image} from 'react-native';
 import {Button} from 'react-native-elements';
 import Header from '../../components/Header';
 import Color from '../../components/color';
@@ -35,6 +35,7 @@ export default class Settings extends Component {
     return (
       
            <View style={styles.container}>
+              
            <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 1}} colors={[Color.RedCard, Color.RedCard]}>
            
            <View style={{height: 30}}/>
@@ -95,7 +96,7 @@ export default class Settings extends Component {
                   
                   </View>
               
-                </LinearGradient>>
+                </LinearGradient>
 
 
       </View>

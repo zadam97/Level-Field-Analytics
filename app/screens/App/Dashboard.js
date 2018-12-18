@@ -56,7 +56,7 @@ export default class Dashboard extends Component {
                                       </Text>
                                 <View style={{flex: 1, height: 150, width: 120, padding: 10, margin: 10 , borderRadius: 10}} backgroundColor= 'white'>
                                       <Text style={styles.stat}>
-                                        14      m/s^3
+                                        14              m/s^3
                                       </Text>
                                 </View>
                             </View>
@@ -66,7 +66,7 @@ export default class Dashboard extends Component {
                                       </Text>
                                   <View style={{flex: 1, height: 150, width: 120, margin: 10 , borderRadius: 10}} backgroundColor= 'white'>
                                       <Text style={styles.stat}>
-                                       8            m/s^2
+                                       8                m/s^2
                                       </Text>
                                   </View>
                                       <Text style={styles.cardText}>
